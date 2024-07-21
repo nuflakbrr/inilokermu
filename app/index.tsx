@@ -3,15 +3,15 @@ import { SafeAreaView, ScrollView, StatusBar, View } from 'react-native'
 import { useRouter } from 'expo-router'
 
 import Welcome from '@/components/Home/Welcome'
-import PopularJob from '@/components/Home/PopularJob'
-import ColorList from '@/components/ColorList'
+import PopularJob from '@/components/Home/PopularJob/PopularJob'
+import NearbyJob from '@/components/Home/NearbyJob/NearbyJob'
 
 const Home = () => {
   const router = useRouter()
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
-    <SafeAreaView style={{ flex: 1, marginVertical: 25 }}>
+    <SafeAreaView style={{ flex: 1, marginTop: 25, marginBottom: 95 }}>
       <StatusBar translucent barStyle={'dark-content'} />
       <ScrollView>
         <View style={{
@@ -27,8 +27,7 @@ const Home = () => {
             }}
           />
           <PopularJob />
-          <ColorList color='#0891b2' />
-          <ColorList color='#0891b2' />
+          <NearbyJob />
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
-import { ActivityIndicator, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
 import { useRouter } from 'expo-router';
 
 import useFetch from '@/hooks/useFetch';
-import PopularJobCard from './PopularJobCard';
+import NearbyJobCard from './NearbyJobCard';
 
-const PopularJob = () => {
+const NearbyJob = () => {
   const router = useRouter();
   const { data, isLoading, error } = useFetch("list", {
     query: "Web Developer",
-    location: 'Indonesia',
+    location: 'Jawa Timur, Indonesia',
+    distance: 0,
     language: 'id-ID',
-    remoteOnly: '',
     datePosted: 'month',
     employmentTypes: 'fulltime;parttime;intern;contractor',
-    index: 2
+    index: 0
   });
 
   const [selectedJob, setSelectedJob] = useState<string | undefined>();
@@ -27,10 +27,7 @@ const PopularJob = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Lowongan Populer</Text>
-        <TouchableOpacity onPress={() => router.push('/search')}>
-          <Text style={styles.headerBtn}>Lihat Semua</Text>
-        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Lowongan Terdekat di Jawa Timur</Text>
       </View>
 
       <View style={styles.cardsContainer}>
@@ -39,15 +36,9 @@ const PopularJob = () => {
         ) : error ? (
           <Text style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginHorizontal: 'auto' }}>Oops! Terjadi Kesalahan. SIlahkan coba kembali!</Text>
         ) : (
-          <FlatList
-            data={data}
-            renderItem={({ item }: any) => (
-              <PopularJobCard data={item} selectedJob={selectedJob} handleCardPress={handleCardPress} />
-            )}
-            keyExtractor={(item: any) => item.id}
-            contentContainerStyle={{ columnGap: 16 }}
-            horizontal
-          />
+          data.map((item) => (
+            <NearbyJobCard data={item} selectedJob={selectedJob} handleCardPress={handleCardPress} />
+          ))
         )}
       </View>
     </View>
@@ -79,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PopularJob
+export default NearbyJob

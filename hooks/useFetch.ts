@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const rapidapi = 'd922ac794emsh5329648c3bd7aeap107970jsn123a5b0b7b05'
+const rapidapi = 'c770d74d82msh2365e4c99cf70c2p125c83jsn2cf0121749e5'
 
 const useFetch = <T>(endpoint: string, query: Record<string, unknown>) => {
   const [data, setData] = useState<T[]>([]);
@@ -23,7 +23,7 @@ const useFetch = <T>(endpoint: string, query: Record<string, unknown>) => {
 
     try {
       const response = await axios.request(options);
-      
+
       setData(response.data.jobs);
       setIsLoading(false);
     } catch (error) {

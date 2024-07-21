@@ -18,9 +18,19 @@ const PopularJobCard = ({data, selectedJob, handleCardPress}: Props) => {
     backgroundColor: selectedJob === data.id ? "#0891b2" : '#FFF',
   });
   
+  const companyName = (selectedJob: string | undefined, data: any) => ({
+    ...styles.companyName,
+    color: selectedJob === data.id ? '#FFF' : '#B3AEC6',
+  });
+
   const jobName = (selectedJob: string | undefined, data: any) => ({
     ...styles.jobName,
     color: selectedJob === data.id ? '#FFF' : '#0891b2',
+  });
+  
+  const jobInfo = (selectedJob: string | undefined, data: any) => ({
+    ...styles.jobInfo,
+    color: selectedJob === data.id ? '#FFF' : '#B3AEC6',
   });
 
   return (
@@ -39,7 +49,7 @@ const PopularJobCard = ({data, selectedJob, handleCardPress}: Props) => {
           style={{...styles.logoImage, overflow: 'hidden'}}
         />
       </TouchableOpacity>
-      <Text style={styles.companyName} numberOfLines={1}>
+      <Text style={companyName(selectedJob, data)} numberOfLines={1}>
         {data.company}
       </Text>
 
@@ -48,8 +58,8 @@ const PopularJobCard = ({data, selectedJob, handleCardPress}: Props) => {
           {data.title}
         </Text>
         <View style={styles.infoWrapper}>
-          <Text style={styles.location}>{data.datePosted}</Text>
-          <Text style={styles.location}> - {data.location.length >= 15 ? data.location.substring(0, 15) + '...' : data.location}</Text>
+          <Text style={jobInfo(selectedJob, data)}>{data.datePosted}</Text>
+          <Text style={jobInfo(selectedJob, data)}> - {data.location.length >= 15 ? data.location.substring(0, 15) + '...' : data.location}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -59,7 +69,7 @@ const PopularJobCard = ({data, selectedJob, handleCardPress}: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: 250,
-    padding: 24,
+    padding: 20,
     borderRadius: 15,
     justifyContent: "space-between",
     shadowColor: "#FFF",
@@ -74,17 +84,17 @@ const styles = StyleSheet.create({
   logoContainer: {
     width: 50,
     height: 50,
-    borderRadius: 0,
+    borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
   },
   logoImage: {
     width: "100%",
     height: "100%",
+    borderRadius: 15,
   },
   companyName: {
     fontSize: 16,
-    color: "#B3AEC6",
     marginTop: 12 / 1.5,
   },
   infoContainer: {
@@ -99,9 +109,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
   },
-  location: {
+  jobInfo: {
     fontSize: 16 - 2,
-    color: "#B3AEC6",
   },
 })
 

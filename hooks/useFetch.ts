@@ -23,8 +23,7 @@ const useFetch = <T>(endpoint: string, query: Record<string, unknown>) => {
 
     try {
       const response = await axios.request(options);
-
-      console.log(response.data.jobs)
+      
       setData(response.data.jobs);
       setIsLoading(false);
     } catch (error) {
